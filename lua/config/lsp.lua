@@ -4,6 +4,11 @@ local export = {}
 local servers = {
 	lua_ls = {},
 	cmake = {},
+	ts_ls = {},
+	svelte = {},
+	sqlls = {},
+	zls = {},
+	clangd = {},
 }
 
 function export.setup(spec)
