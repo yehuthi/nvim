@@ -3,6 +3,7 @@ local export = {}
 
 local servers = {
 	lua_ls = {},
+	cmake = {},
 }
 
 function export.setup(spec)
@@ -125,6 +126,82 @@ function export.setup(spec)
 				}
 			end
 		},
+		{
+			'hrsh7th/nvim-cmp',
+			dependencies = {
+				'L3MON4D3/LuaSnip',
+				'saadparwaiz1/cmp_luasnip',
+				'hrsh7th/cmp-nvim-lsp',
+				'hrsh7th/cmp-path',
+			},
+			build = (function()
+				-- Build Step is needed for regex support in snippets.
+				-- This step is not supported in many windows environments.
+				-- Remove the below condition to re-enable on windows.
+				if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+					return
+				end
+				return 'make install_jsregexp'
+			end)(),
+			config = function()
+				local cmp = require 'cmp'
+				local luasnip = require 'luasnip'
+				luasnip.config.setup {}
+
+
+				local t = luasnip.text_node
+				local choice = luasnip.choice_node
+				luasnip.add_snippets('cmake', {
+					luasnip.snippet('cmake_minimum_version', {
+						t("cmake_minimum_required(VERSION 3.15...3.30)")
+					})
+				})
+				luasnip.add_snippets('sql', {
+					luasnip.snippet('primarypg', {
+						t('id '),
+						choice(1, { t('INTEGER'), t('SMALLINT'), t('BIGINT') }),
+						t(' PRIMARY KEY GENERATED '),
+						choice(2, {t('ALWAYS'), t('BY DEFAULT')}),
+						t(' AS IDENTITY'),
+					}),
+				})
+				cmp.setup {
+					mapping = cmp.mapping.preset.insert {
+						['<C-n>'] = cmp.mapping.select_next_item(),
+						['<C-p>'] = cmp.mapping.select_prev_item(),
+						['<C-b>'] = cmp.mapping.scroll_docs(-4),
+						['<C-f>'] = cmp.mapping.scroll_docs(4),
+						['<C-y>'] = cmp.mapping.confirm { select = true },
+						['<Enter>'] = cmp.mapping.confirm { select = true },
+						['<C-Space>'] = cmp.mapping.complete {},
+						['<C-l>'] = cmp.mapping(function()
+							if luasnip.expand_or_locally_jumpable() then
+								luasnip.expand_or_jump()
+							end
+						end, { 'i', 's' }),
+						['<C-h>'] = cmp.mapping(function()
+							if luasnip.locally_jumpable(-1) then
+								luasnip.jump(-1)
+							end
+						end, { 'i', 's' }),
+					},
+					snippet = {
+						expand = function(args)
+							luasnip.lsp_expand(args.body)
+						end
+					},
+					completion = {
+						completeopt = 'menu,menuone,noinsert'
+					},
+					sources = {
+						{ name = "lazydev", group_index = 0 },
+						{ name = "nvim_lsp" },
+						{ name = "luasnip" },
+						{ name = "path" },
+					},
+				}
+			end
+		}
 	})
 end
 
