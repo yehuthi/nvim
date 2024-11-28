@@ -1,3 +1,4 @@
+local util = require("util")
 local export = {}
 
 local lazy_spec = {
@@ -55,8 +56,7 @@ function export.setup(spec, config)
 			end,
 		})
 	end
-	spec = vim.tbl_extend('force', spec, lazy_spec)
-	return spec
+	return util.append(spec, lazy_spec)
 end
 
 export.lazy = lazy_spec
