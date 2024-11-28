@@ -27,7 +27,10 @@ local lazy_spec = {
 			},
 		},
 	},
-
+	{
+		'j-hui/fidget.nvim',
+		opts = {},
+	},
 }
 
 ---@class config
@@ -48,7 +51,7 @@ function export.setup(spec, config)
 	if yank_timeout then
 		util.autocmd('TextYankPost', {
 			desc = 'Highlight when yanking (copying) text',
-			group = util.augroup('highlight-yank', { clear = true }),
+			group = util.augroup('highlight-yank'),
 			callback = function()
 				vim.highlight.on_yank({ timeout = yank_timeout })
 			end,

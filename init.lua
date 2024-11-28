@@ -6,6 +6,7 @@ lazy_spec = require("config.visual").setup(lazy_spec, {})
 lazy_spec = require("config.git").setup(lazy_spec)
 lazy_spec = require("config.files").setup(lazy_spec)
 lazy_spec = require("config.telescope").setup(lazy_spec)
+lazy_spec = require("config.lsp").setup(lazy_spec)
 
 require("config.lazy").setup {
 	install = { colorscheme = { "habamax" } },
@@ -14,7 +15,7 @@ require("config.lazy").setup {
 }
 
 util.autocmd('VimEnter', {
-	group = util.augroup('lazy-autoupdate', { clear = true }),
+	group = util.augroup('lazy-autoupdate'),
 	callback = function()
 		require("lazy").update({ show = false })
 	end

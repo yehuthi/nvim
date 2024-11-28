@@ -13,6 +13,16 @@ function export.append(a, b)
 end
 
 export.autocmd = vim.api.nvim_create_autocmd
-export.augroup = vim.api.nvim_create_augroup
+
+export.augroup = function(name)
+	return vim.api.nvim_create_augroup(name, { clear = true })
+end
+
+---@param path string
+---@return table?
+function export.require_try(path)
+	local ok, module = pcall(require, path)
+	return ok and module or nil
+end
 
 return export
