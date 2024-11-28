@@ -124,6 +124,23 @@ function export.setup(spec)
 				require('mason-tool-installer').setup {
 					ensure_installed = ensure_installed
 				}
+				local capabilities = vim.lsp.protocol.make_client_capabilities()
+				local cmp = util.require_try('cmp_nvim_lsp')
+				if cmp ~= nil then
+					capabilities = vim.tbl_deep_extend('force',
+						capabilities,
+						cmp.default_capabilities()
+					)
+				end
+				require('mason-lspconfig').setup {
+					handlers = {
+						function(server_name)
+							local server = servers[server_name] or {}
+							server.capabilities = vim.tbl_deep_extend('force',
+								{}, capabilities, server.capabilities or {})
+						end
+					}
+				}
 			end
 		},
 		{
