@@ -46,11 +46,9 @@ function export.setup(spec, config)
 	local yank_timeout = config.yank_highlight
 	or config_default.yank_highlight
 	if yank_timeout then
-		vim.api.nvim_create_autocmd('TextYankPost', {
+		util.autocmd('TextYankPost', {
 			desc = 'Highlight when yanking (copying) text',
-			group = vim.api.nvim_create_augroup(
-			'highlight-yank', { clear = true }
-			),
+			group = util.augroup('highlight-yank', { clear = true }),
 			callback = function()
 				vim.highlight.on_yank({ timeout = yank_timeout })
 			end,

@@ -12,4 +12,7 @@ function export.append(a, b)
 	return a
 end
 
+export.autocmd = vim.api.nvim_create_autocmd
+export.augroup = vim.api.nvim_create_augroup
+
 return export
