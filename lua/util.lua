@@ -25,4 +25,11 @@ function export.require_try(path)
 	return ok and module or nil
 end
 
+function export.fold(array, fn, accumulator)
+	for _, value in ipairs(array) do
+		accumulator = fn(accumulator, value)
+	end
+	return accumulator
+end
+
 return export

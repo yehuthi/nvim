@@ -42,7 +42,7 @@ local config_default = {
 }
 
 ---@param spec table
----@param config config
+---@param config? config
 ---@return table
 function export.setup(spec, config)
 	config = config or {}

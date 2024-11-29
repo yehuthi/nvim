@@ -1,14 +1,11 @@
 local util = require("util")
 require("config.editor").setup {}
 
-local lazy_spec = {}
-lazy_spec = require("config.visual").setup(lazy_spec, {})
-lazy_spec = require("config.git").setup(lazy_spec)
-lazy_spec = require("config.files").setup(lazy_spec)
-lazy_spec = require("config.telescope").setup(lazy_spec)
-lazy_spec = require("config.lsp").setup(lazy_spec)
-lazy_spec = require("config.ux").setup(lazy_spec)
-lazy_spec = require("config.edit").setup(lazy_spec)
+local lazy_spec = util.fold({
+	"visual", "git", "files", "telescope", "lsp", "ux", "edit",
+}, function (spec, submodule)
+	return require("config." .. submodule).setup(spec)
+end, {})
 
 require("config.lazy").setup {
 	install = { colorscheme = { "habamax" } },
