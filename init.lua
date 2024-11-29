@@ -7,6 +7,7 @@ lazy_spec = require("config.git").setup(lazy_spec)
 lazy_spec = require("config.files").setup(lazy_spec)
 lazy_spec = require("config.telescope").setup(lazy_spec)
 lazy_spec = require("config.lsp").setup(lazy_spec)
+lazy_spec = require("config.ux").setup(lazy_spec)
 
 require("config.lazy").setup {
 	install = { colorscheme = { "habamax" } },
