@@ -57,7 +57,7 @@ function export.setup(spec)
 								func,
 								{
 									buffer = event.buf,
-									desc = 'LSP: ' .. desc,
+									desc = desc .. ' (LSP)',
 								}
 							)
 						end
@@ -80,13 +80,13 @@ function export.setup(spec)
 								'Type [D]efinition'
 							)
 							bind(
-								'<leader>ds', ts.lsp_definitions,
-								'[D]ocument [S]ymbols'
+								'<leader>fs', ts.lsp_definitions,
+								'[F]ind [S]ymbols (Document)'
 							)
 							bind(
-								'<leader>ws',
+								'<leader>fw',
 								ts.lsp_dynamic_workspace_symbols,
-								'[W]orkspace [S]ymbols'
+								'[F]ind Symbols ([W]orkspace)'
 							)
 						end
 						bind(

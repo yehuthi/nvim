@@ -5,6 +5,14 @@ export.lazy_spec = {
 	{
 		'folke/which-key.nvim',
 		event = "VeryLazy",
+		opts = {
+			spec = {
+				{ '<leader>f', group = '[F]ind' },
+				{ '<leader>g', group = '[G]oto' },
+				{ '<leader>r', group = '[R]efactor' },
+				{ '<leader>c', group = '[C]ode' },
+			}
+		},
 		keys = {
 			{
 				"<leader>?",

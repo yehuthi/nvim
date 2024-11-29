@@ -26,9 +26,9 @@ function export.setup(spec)
 					},
 				}
 				local fns = require 'telescope.builtin'
-				vim.keymap.set('n', '<leader>ff', fns.find_files)
-				vim.keymap.set('n', '<leader>fh', fns.help_tags)
-				vim.keymap.set('n', '<leader>fg', fns.live_grep)
+				vim.keymap.set('n', '<leader>ff', fns.find_files, { desc = "[F]ind [F]ile" })
+				vim.keymap.set('n', '<leader>fh', fns.help_tags, { desc = "[F]ind [H]elp" })
+				vim.keymap.set('n', '<leader>fg', fns.live_grep, { desc = "[F]ind [G]rep" })
 			end
 		}
 	})
