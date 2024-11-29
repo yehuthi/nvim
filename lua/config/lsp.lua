@@ -2,7 +2,31 @@ local util = require("util")
 local export = {}
 
 local servers = {
-	lua_ls = {},
+	lua_ls = {
+		on_init = function(client)
+			if client.workspace_folders then
+				local path = client.workspace_folders[1].name
+				local has_rc = vim.uv.fs_stat(path..'/.luarc.json') or
+					vim.uv.fs_stat(path..'/.luarc.jsonc')
+				if has_rc then return end
+			end
+
+			local settings = {
+				runtime = { version = 'LuaJIT' },
+				workspace = {
+					checkThirdParty = false,
+					library = { vim.env.VIMRUNTIME }
+				},
+			}
+
+			client.config.settings.Lua = vim.tbl_deep_extend('force',
+				client.config.settings.Lua, settings
+			)
+		end,
+		settings = {
+			Lua = {}
+		}
+	},
 	cmake = {},
 	ts_ls = {},
 	svelte = {},
