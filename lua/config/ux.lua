@@ -11,6 +11,7 @@ export.lazy_spec = {
 				{ '<leader>g', group = '[G]oto' },
 				{ '<leader>r', group = '[R]efactor' },
 				{ '<leader>c', group = '[C]ode' },
+				{ '<leader>s', group = '[S]how' },
 			}
 		},
 		keys = {

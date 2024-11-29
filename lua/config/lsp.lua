@@ -101,6 +101,12 @@ function export.setup(spec)
 							'gD', vim.lsp.buf.declaration,
 							'[G]oto [D]eclaration'
 						)
+						bind(
+							'<leader>si', vim.lsp.buf.hover,
+							'[S]how [I]nformation'
+						)
+						bind('<leader>se', vim.diagnostic.open_float,
+							'[S]how [E]rror')
 
 						local client =
 							vim.lsp.get_client_by_id(event.data.client_id)
