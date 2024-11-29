@@ -111,9 +111,9 @@ function export.setup(spec)
 						local client =
 							vim.lsp.get_client_by_id(event.data.client_id)
 							if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-								bind('<leader>th', function()
+								bind('<leader>sh', function()
 									vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-								end, '[T]oggle Inlay [H]ints')
+								end, '[S]how Inlay [H]ints')
 							end
 
 						if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
