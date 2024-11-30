@@ -7,7 +7,7 @@ function export.setup(spec)
 			keys = { "s", "S" },
 			init = function()
 				vim.g['sneak#label']  = 1
-				vim.g['sneak#prompt'] = "🔎 "
+				vim.g['sneak#prompt'] = "🔎 " -- <- requries an emoji font
 				require('sneak')
 			end,
 		}
