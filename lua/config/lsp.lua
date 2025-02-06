@@ -33,6 +33,7 @@ local servers = {
 	sqlls = {},
 	zls = {},
 	clangd = {},
+	rust_analyzer = {},
 }
 
 function export.setup(spec)
