@@ -1,6 +1,10 @@
 local util = require("util")
 local export = {}
 
+-- disables `zig fmt` on save, and error panel (which I usually find to be
+-- misleading).
+vim.g.zig_fmt_autosave = 0
+
 local servers = {
 	lua_ls = {
 		on_init = function(client)
