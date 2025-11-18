@@ -146,9 +146,14 @@ function export.setup(spec)
 					end
 				})
 
-				local lspconfig = require('lspconfig')
+				-- Deprecated:
+				-- local lspconfig = require('lspconfig')
+				-- for server, config in pairs(servers) do
+				-- 	lspconfig[server].setup(config)
+				-- end
 				for server, config in pairs(servers) do
-					lspconfig[server].setup(config)
+					vim.lsp.config[server] = config
+					vim.lsp.enable(server)
 				end
 			end
 		},
